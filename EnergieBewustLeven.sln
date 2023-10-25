@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergieBewustLeven.API", "EnergieBewustLeven.API\EnergieBewustLeven.API.csproj", "{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7D03E7A-9BE2-4BEA-904C-E55D70305236}
+	EndGlobalSection
+EndGlobal
