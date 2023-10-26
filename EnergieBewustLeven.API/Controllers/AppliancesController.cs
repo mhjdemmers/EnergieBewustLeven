@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using EnergieBewustLeven.API.Models.Domain;
+using EnergieBewustLeven.API.Data;
 
 namespace EnergieBewustLeven.API.Controllers
 {
@@ -7,12 +9,19 @@ namespace EnergieBewustLeven.API.Controllers
     [ApiController]
     public class AppliancesController : ControllerBase
     {
+        private readonly EnergieBewustLevenDbContext dbContext;
+
+        public AppliancesController(EnergieBewustLevenDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
         // GET: 
         [HttpGet]
-        public IActionResult GetAllAppliances()
+        public IActionResult GetAll()
         {
-            string[] appliancesNames = new string[] { "yeet", "Jane", "Mark"};
-            return Ok(appliancesNames);
+            var appliances = dbContext.Appliances.ToList();
+
+            return Ok(appliances);
         }
     }
 }
