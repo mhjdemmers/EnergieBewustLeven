@@ -12,7 +12,7 @@ namespace EnergieBewustLeven.API.Controllers
         public IActionResult GetAllAppliances()
         {
             string[] appliancesNames = new string[] { "yeet", "Jane", "Mark"};
-            return Ok();
+            return Ok(appliancesNames);
         }
     }
 }
