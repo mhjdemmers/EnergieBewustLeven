@@ -15,7 +15,8 @@ namespace EnergieBewustLeven.API.Controllers
         {
             this.dbContext = dbContext;
         }
-        // GET: 
+        // GET:
+        // haal op
         [HttpGet]
         public IActionResult GetAll()
         {
