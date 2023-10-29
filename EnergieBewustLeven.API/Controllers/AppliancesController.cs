@@ -66,5 +66,32 @@ namespace EnergieBewustLeven.API.Controllers
             // Return DTO
             return Ok(applianceDTO);
         }
+
+        // POST CREATE NEW APPLIANCE
+        //POST:
+        [HttpPost]
+        public IActionResult Create([FromBody] AddApplianceRequestDTO addApplianceRequestDTO)
+        {
+            // Map DTO to Domain Model
+            var applianceDomain = new Appliance
+            {
+                Name = addApplianceRequestDTO.Name,
+                Brand = addApplianceRequestDTO.Brand
+            };
+
+            // Use Domain Model to create appliance
+            dbContext.Appliances.Add(applianceDomain);
+            dbContext.SaveChanges();
+
+            // Map Domain back to DTO
+            var applianceDTO = new ApplianceDTO()
+            {
+                Id = applianceDomain.Id,
+                Name = applianceDomain.Name,
+                Brand = applianceDomain.Brand
+            };
+
+            return CreatedAtAction(nameof(Get), new { id = applianceDomain.Id }, applianceDTO);
+        }
     }
 }
