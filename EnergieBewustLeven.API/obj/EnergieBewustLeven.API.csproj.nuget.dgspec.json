@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {}
+    "C:\\Users\\Home ICT\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {}
   },
   "projects": {
-    "D:\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {
+    "C:\\Users\\Home ICT\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
+        "projectUniqueName": "C:\\Users\\Home ICT\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
         "projectName": "EnergieBewustLeven.API",
-        "projectPath": "D:\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
-        "packagesPath": "C:\\Users\\Mareno\\.nuget\\packages\\",
-        "outputPath": "D:\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\obj\\",
+        "projectPath": "C:\\Users\\Home ICT\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
+        "packagesPath": "C:\\Users\\Home ICT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Home ICT\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mareno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Home ICT\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -83,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
