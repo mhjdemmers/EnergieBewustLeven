@@ -27,10 +27,10 @@ namespace EnergieBewustLeven.API.Controllers
             var measurementsDomain = dbContext.Measurements.ToList();
 
             // Map Domain Models to DTOs
-            var measurementDTO = new List<MeasurementDTO>();
+            var measurementsDTO = new List<MeasurementDTO>();
             foreach (var measurementDomain in measurementsDomain)
             {
-                measurementDTO.Add(new MeasurementDTO()
+                measurementsDTO.Add(new MeasurementDTO()
                 {
                     Id = measurementDomain.Id,
                     ApplianceId = measurementDomain.ApplianceId,
@@ -39,13 +39,13 @@ namespace EnergieBewustLeven.API.Controllers
             }
 
             // Return DTOs
-            return Ok(measurementDTO);
+            return Ok(measurementsDTO);
         }
 
         //GET MEASUREMENT BY ID
         //GET:
         [HttpGet]
-        [Route("{id:Guid}")]
+        [Route("ById/{id:Guid}")]
         public IActionResult GetMeasurement([FromRoute] Guid id)
         {
             // Get from database - Domain Model
@@ -66,6 +66,31 @@ namespace EnergieBewustLeven.API.Controllers
 
             // Return DTO
             return Ok(measurementDTO);
+        }
+
+        //GET MEASUREMENT BY APPLIANCE
+        //GET:
+        [HttpGet]
+        [Route("ByAppliance{id:Guid}")]
+        public async Task<IActionResult> GetMeasurementsByAppliance([FromRoute] Guid applianceId)
+        {
+            // Get from database - Domain Model
+            var measurementsDomain = await dbContext.Measurements.Where(m => m.ApplianceId == applianceId).ToListAsync();
+
+            // Map Domain Models to DTOs
+            var measurementsDTO = new List<MeasurementDTO>();
+            foreach (var measurementDomain in measurementsDomain)
+            {
+                measurementsDTO.Add(new MeasurementDTO()
+                {
+                    Id = measurementDomain.Id,
+                    ApplianceId = measurementDomain.ApplianceId,
+                    Verbruik = measurementDomain.Verbruik
+                });
+            }
+
+            // Return DTOs
+            return Ok(measurementsDTO);
         }
 
         // POST CREATE NEW MEASUREMENT
@@ -115,5 +140,7 @@ namespace EnergieBewustLeven.API.Controllers
 
             return NoContent();
         }
+
+        
     }
 }
