@@ -371,3 +371,7 @@ FodyWeavers.xsd
 
 # Ignore database data
 .postgresdata/
+
+#extra
+.editconfig
+.cache
