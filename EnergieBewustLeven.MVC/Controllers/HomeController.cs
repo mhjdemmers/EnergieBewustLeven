@@ -28,6 +28,16 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View();
         }
 
+        public IActionResult ListPlaceholder()
+        {
+            return View();
+        }
+
+        public IActionResult AddPlaceholder()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

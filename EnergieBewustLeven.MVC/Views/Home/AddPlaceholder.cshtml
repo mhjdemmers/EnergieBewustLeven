@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "AddPlaceholder";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label  class="control-label">Text Input</label>
+                <input  class="form-control" />
+                <span  class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Dropdown select</label>
+                <select  class="form-control" asp-items="ViewBag.Items"></select>
+            </div>
+            <div>
+                <p></p>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary" asp-action="">Create</a>
+            </div>
+        </form>
+    </div>
+</div>

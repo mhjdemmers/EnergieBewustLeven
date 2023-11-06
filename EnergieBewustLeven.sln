@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnergieBewustLeven.API", "EnergieBewustLeven.API\EnergieBewustLeven.API.csproj", "{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergieBewustLeven.MVC", "EnergieBewustLeven.MVC\EnergieBewustLeven.MVC.csproj", "{D3139920-8B9C-421D-94E3-E389A711154E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnergieBewustLeven.MVC", "EnergieBewustLeven.MVC\EnergieBewustLeven.MVC.csproj", "{3D0DFEC2-8379-44A5-B6ED-A39069E8C107}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5132BE1-E8D9-4C6F-956D-E6845DA83D7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3139920-8B9C-421D-94E3-E389A711154E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3139920-8B9C-421D-94E3-E389A711154E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3139920-8B9C-421D-94E3-E389A711154E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3139920-8B9C-421D-94E3-E389A711154E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0DFEC2-8379-44A5-B6ED-A39069E8C107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0DFEC2-8379-44A5-B6ED-A39069E8C107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0DFEC2-8379-44A5-B6ED-A39069E8C107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0DFEC2-8379-44A5-B6ED-A39069E8C107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
