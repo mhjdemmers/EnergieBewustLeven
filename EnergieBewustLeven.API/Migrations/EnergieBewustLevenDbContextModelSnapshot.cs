@@ -55,6 +55,26 @@ namespace EnergieBewustLeven.API.Migrations
 
                     b.ToTable("Measurements");
                 });
+
+            modelBuilder.Entity("EnergieBewustLeven.API.Models.Domain.Review", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ApplianceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ReviewScore")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
+                });
 #pragma warning restore 612, 618
         }
     }
