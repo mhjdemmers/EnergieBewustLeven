@@ -2,6 +2,8 @@
 using EnergieBewustLeven.MVC.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace EnergieBewustLeven.MVC.Controllers
 {
@@ -22,10 +24,21 @@ namespace EnergieBewustLeven.MVC.Controllers
             return level;
         }
 
-        public IActionResult AddLevel(ApplicationUser user)
+        public ApplicationUser GetLoggedInUser()
         {
-            user.Level += 1;
-            return Ok(user);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+            ApplicationUser applicationUser = new ApplicationUser();
+            applicationUser = dbContext.Users.FirstOrDefault(x => x.Id == userId);
+            return applicationUser;
+        }
+
+        public IActionResult AddLevel()
+        {
+            var user = GetLoggedInUser();
+            user.Level = user.Level + 1;
+            dbContext.Update(user);
+            dbContext.SaveChanges();
+            return RedirectToAction("ProgressionPlaceholder", "Home");
         }
 
     }
