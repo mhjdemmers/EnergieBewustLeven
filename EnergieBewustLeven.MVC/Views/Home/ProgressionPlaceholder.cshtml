@@ -4,11 +4,31 @@
 }
 
 <div>
-    <img id="ProgressionImg" src="~/Images/progression1.png" onclick="loadNext"/>
+    <img id="progressionImg" src="~/Images/progression1.png" onclick="loadNext"/>
 </div>
-<div>
-    <a style="text-decoration:none" href="@Url.Action("ProgressionNext", "Home")">
-        <img src="~/Images/progression1.png" />
-    </a>
-</div>
+<body>
+    <h2>Changing an Image in the HTML document using JavaScript</h2>
+    <p id="upper">The image shown below will be changed once you click the button.</p>
+    <img src="~/Images/progression1.png" id="image">
+        <br> <br>
+        <button id="btn" onclick="changeImage()"> Click to change the Image </button>
+        <p id="result"> </p>
+        <script>
+            var result = document.getElementById("result");
+            var upper = document.getElementById("upper");
+            function changeImage() {
+                var image = document.getElementById("image");
+                if (image.src == "~/Images/progression1.png") {
+                    image.src = "~/Images/progression2.png";
+                    result.innerHTML += " The image is changed from <b> Light mode to Dark mode </b>. <br> ";
+                }
+                else {
+                    image.src = "~/Images/progression3.png";
+                    result.innerHTML += " The image is changed from <b> Dark mode to Light mode </b>. ";
+                }
+                upper.innerHTML = " The previous image is replaced by the new image as you click the button. <br> ";
+            }
+        </script>
+</body>
+
 

@@ -45,6 +45,7 @@ namespace EnergieBewustLeven.MVC.Controllers
 
         public IActionResult ProgressionNext()
         {
+            
             return RedirectToAction("ProgressionPlaceholder");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
