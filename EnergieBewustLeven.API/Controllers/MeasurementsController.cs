@@ -71,7 +71,7 @@ namespace EnergieBewustLeven.API.Controllers
         //GET MEASUREMENT BY APPLIANCE
         //GET:
         [HttpGet]
-        [Route("ByAppliance{id:Guid}")]
+        [Route("ByAppliance/{id:Guid}")]
         public async Task<IActionResult> GetMeasurementsByAppliance([FromRoute] Guid applianceId)
         {
             // Get from database - Domain Model
