@@ -48,7 +48,7 @@ namespace EnergieBewustLeven.API.Controllers
         //GET REVIEW BY APPLIANCE
         //GET:
         [HttpGet]
-        [Route("ByAppliance/{id:Guid}")]
+        [Route("ByAppliance/{applianceId:Guid}")]
         public async Task<IActionResult> GetReviewsByAppliance([FromRoute] Guid applianceId)
         {
             // Get from database - Domain Model

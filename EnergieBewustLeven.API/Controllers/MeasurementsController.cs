@@ -68,6 +68,31 @@ namespace EnergieBewustLeven.API.Controllers
             return Ok(measurementDTO);
         }
 
+        //GET MEASUREMENT BY APPLIANCE
+        //GET:
+        [HttpGet]
+        [Route("ByAppliance/{applianceId:Guid}")]
+        public async Task<IActionResult> GetMeasurementByAppliance([FromRoute] Guid applianceId)
+        {
+            // Get from database - Domain Model
+            var measurementsDomain = await dbContext.Measurements.Where(m => m.ApplianceId == applianceId).ToListAsync();
+
+            // Map Domain Models to DTOs
+            var measurementsDTO = new List<MeasurementDTO>();
+            foreach (var measrementDomain in measurementsDomain)
+            {
+                measurementsDTO.Add(new MeasurementDTO()
+                {
+                    Id = measrementDomain.Id,
+                    ApplianceId = measrementDomain.ApplianceId,
+                    Verbruik = measrementDomain.Verbruik
+                });
+            }
+
+            // Return DTOs
+            return Ok(measurementsDTO);
+        }
+
         // POST CREATE NEW MEASUREMENT
         // POST:
         [HttpPost]
