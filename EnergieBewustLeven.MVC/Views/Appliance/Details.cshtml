@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>ApplianceDTO</h4>
+    <h4>@Html.DisplayNameFor(model => model.ApplianceName)</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -33,20 +33,42 @@
                 </dd>
             </div>
         }
-        <dt class="col-sm-2">
-            @Html.DisplayName("User Reviews:")
-        </dt>
+    </dl>
+    <h5>User Reviews</h5>
+    <table>
         @foreach (var item in Model.Reviews)
         {
-            <div>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(modelItem => item.ReviewScore)
-                </dd>
-            </div>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewText)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ReviewScore)*@
+                    @(item.ReviewScore)/10
+                </td>
+            </tr>
         }
-    </dl>
+    </table>
 </div>
-<div>
+<div class="button-container">
     <a class="btn btn-primary" asp-action="" asp-route-id="@Model?.ApplianceId">Meting toevoegen</a> |
     <a class="btn btn-primary" asp-action="Index">Terug naar apparaten</a>
 </div>
+
+<style>
+ /*   table {
+        width: 100%;
+    }*/
+
+    td {
+        padding: 8px;
+    }
+
+    .button-container {
+        margin-top: 50px;
+    }
+
+/*    .btn {
+        margin-right: 10px; 
+    }*/
+</style>
