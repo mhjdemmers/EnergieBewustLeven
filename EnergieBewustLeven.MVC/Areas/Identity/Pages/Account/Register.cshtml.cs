@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using NuGet.ProjectModel;
+using EnergieBewustLeven.MVC.Constants;
 
 namespace EnergieBewustLeven.MVC.Areas.Identity.Pages.Account
 {
@@ -117,6 +118,7 @@ namespace EnergieBewustLeven.MVC.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 user.Name = Input.Name;
+                
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -124,6 +126,8 @@ namespace EnergieBewustLeven.MVC.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, Roles.User.ToString());
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

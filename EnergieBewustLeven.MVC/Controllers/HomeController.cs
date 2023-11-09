@@ -1,4 +1,5 @@
-﻿using EnergieBewustLeven.MVC.Data;
+﻿using EnergieBewustLeven.MVC.Constants;
+using EnergieBewustLeven.MVC.Data;
 using EnergieBewustLeven.MVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,14 +29,7 @@ namespace EnergieBewustLeven.MVC.Controllers
 
         public IActionResult Index()
         {
-            var role = User.FindFirstValue(ClaimTypes.Role); // will give the role
-            if(role != null)
-            {
-                return View();
-            }
-            else
-            {
-            }
+
             return View();
         }
 

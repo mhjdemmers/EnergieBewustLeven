@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kayde\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {}
+    "C:\\Users\\kayde\\source\\repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kayde\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {
+    "C:\\Users\\kayde\\source\\repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kayde\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
+        "projectUniqueName": "C:\\Users\\kayde\\source\\repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
         "projectName": "EnergieBewustLeven.API",
-        "projectPath": "C:\\Users\\kayde\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
+        "projectPath": "C:\\Users\\kayde\\source\\repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\EnergieBewustLeven.API.csproj",
         "packagesPath": "C:\\Users\\kayde\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kayde\\Source\\Repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\obj\\",
+        "outputPath": "C:\\Users\\kayde\\source\\repos\\EnergieBewustLeven\\EnergieBewustLeven.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kayde\\AppData\\Roaming\\NuGet\\NuGet.Config",
