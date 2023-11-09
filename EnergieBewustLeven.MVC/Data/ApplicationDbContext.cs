@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using EnergieBewustLeven.API.Models.DTO;
 
 namespace EnergieBewustLeven.MVC.Data
 {
@@ -9,5 +10,6 @@ namespace EnergieBewustLeven.MVC.Data
             : base(options)
         {
         }
+        public DbSet<EnergieBewustLeven.API.Models.DTO.ApplianceDTO> ApplianceDTO { get; set; } = default!;
     }
 }
