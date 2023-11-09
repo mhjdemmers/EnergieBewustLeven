@@ -1,4 +1,5 @@
 ﻿using EnergieBewustLeven.API.Models.DTO;
+using EnergieBewustLeven.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnergieBewustLeven.MVC.Controllers
@@ -68,6 +69,16 @@ namespace EnergieBewustLeven.MVC.Controllers
                 }
             }
             return View(appliance);
+        }
+
+        public IActionResult Compare()
+        {
+            return View();
+        }
+
+        public IActionResult Compare(CompareViewModel compareViewModel)
+        {
+
         }
     }
 }
