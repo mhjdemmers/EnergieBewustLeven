@@ -10,6 +10,6 @@ namespace EnergieBewustLeven.MVC.Data
             : base(options)
         {
         }
-        public DbSet<EnergieBewustLeven.API.Models.DTO.ApplianceDTO> ApplianceDTO { get; set; } = default!;
+        //public DbSet<EnergieBewustLeven.API.Models.DTO.ApplianceDTO> ApplianceDTO { get; set; } = default!;
     }
 }

@@ -1,16 +1,17 @@
 ﻿using EnergieBewustLeven.API.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
 
 namespace EnergieBewustLeven.MVC.Controllers
 {
-    public class MeasurementsController : Controller
+    public class ReviewsController : Controller
     {
 
         //Hosted web API REST Service base url
         string Baseurl = "https://localhost:7218/api/";
 
-        
+
         public async Task<IActionResult> Create()
         {
             // Call the API to get the list of ApplianceDTOs
@@ -57,10 +58,10 @@ namespace EnergieBewustLeven.MVC.Controllers
             }
         }
 
-        //POST: measurements/create
+        //POST: reviews/create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(AddMeasurementRequestDTO measurement)
+        public IActionResult Create(AddReviewRequestDTO review)
         {
             using (var client = new HttpClient())
             {
@@ -68,7 +69,7 @@ namespace EnergieBewustLeven.MVC.Controllers
                 client.BaseAddress = new Uri(Baseurl);
 
                 //Making a HttpPost Request
-                var responseTask = client.PostAsJsonAsync("Measurements", measurement);
+                var responseTask = client.PostAsJsonAsync("Reviews", review);
                 responseTask.Wait();
 
                 //To store result of web api response.   
@@ -77,10 +78,10 @@ namespace EnergieBewustLeven.MVC.Controllers
                 //If success received   
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<AddMeasurementRequestDTO>();
+                    var readTask = result.Content.ReadAsAsync<AddReviewRequestDTO>();
                     readTask.Wait();
 
-                    measurement = readTask.Result;
+                    review = readTask.Result;
                 }
                 else
                 {
