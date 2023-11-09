@@ -98,11 +98,40 @@ namespace EnergieBewustLeven.MVC.Controllers
                 }
             }
 
+            List<ReviewDTO> reviews = null;
+            using (var client = new HttpClient())
+            {
+                //Setting the base address of the API
+                client.BaseAddress = new Uri("https://localhost:7218/api/Reviews/ByAppliance/");
+
+                //Making a HttpGet Request
+                var responseTask = client.GetAsync(id.ToString());
+                responseTask.Wait();
+
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<List<ReviewDTO>>();
+                    readTask.Wait();
+
+                    reviews = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+            }
+
             ApplianceDetailViewModel viewmodel = new ApplianceDetailViewModel();
             viewmodel.ApplianceId = appliance.Id;
             viewmodel.ApplianceName = appliance.Name;
             viewmodel.ApplianceBrand = appliance.Brand;
             viewmodel.Measurements = measurements;
+            viewmodel.Reviews = reviews;
             return View(viewmodel);
         }
 

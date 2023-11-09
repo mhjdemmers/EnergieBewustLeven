@@ -8,5 +8,6 @@ namespace EnergieBewustLeven.MVC.Models
         public string? ApplianceName { get; set; }
         public string? ApplianceBrand { get; set; }
         public List<MeasurementDTO>? Measurements { get; set; }
+        public List<ReviewDTO>? Reviews { get; set; }
     }
 }
