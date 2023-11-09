@@ -1,6 +1,11 @@
-﻿using EnergieBewustLeven.MVC.Models;
+﻿using EnergieBewustLeven.MVC.Constants;
+using EnergieBewustLeven.MVC.Data;
+using EnergieBewustLeven.MVC.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace EnergieBewustLeven.MVC.Controllers
 {
@@ -8,13 +13,23 @@ namespace EnergieBewustLeven.MVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext dbContext;
+
+        public HomeController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager, ILogger<HomeController> logger)
         {
+            _userManager = userManager;
+            this.dbContext = dbContext;
             _logger = logger;
         }
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -38,11 +53,22 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View();
         }
 
+        
+
+        public ApplicationUser GetLoggedInUser()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+            ApplicationUser applicationUser = new ApplicationUser();
+            applicationUser = dbContext.Users.FirstOrDefault(x => x.Id == userId);
+            return applicationUser;
+        }
+        
         public IActionResult ProgressionPlaceholder()
         {
-            return View();
-        }
 
+            var loggedInUser = GetLoggedInUser();
+            return View(loggedInUser);
+        }
         public IActionResult ProgressionNext()
         {
             return RedirectToAction("ProgressionPlaceholder");
