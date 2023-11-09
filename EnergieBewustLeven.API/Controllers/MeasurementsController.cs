@@ -27,10 +27,10 @@ namespace EnergieBewustLeven.API.Controllers
             var measurementsDomain = dbContext.Measurements.ToList();
 
             // Map Domain Models to DTOs
-            var measurementsDTO = new List<MeasurementDTO>();
+            var measurementDTO = new List<MeasurementDTO>();
             foreach (var measurementDomain in measurementsDomain)
             {
-                measurementsDTO.Add(new MeasurementDTO()
+                measurementDTO.Add(new MeasurementDTO()
                 {
                     Id = measurementDomain.Id,
                     ApplianceId = measurementDomain.ApplianceId,
@@ -39,13 +39,13 @@ namespace EnergieBewustLeven.API.Controllers
             }
 
             // Return DTOs
-            return Ok(measurementsDTO);
+            return Ok(measurementDTO);
         }
 
         //GET MEASUREMENT BY ID
         //GET:
         [HttpGet]
-        [Route("ById/{id:Guid}")]
+        [Route("{id:Guid}")]
         public IActionResult GetMeasurement([FromRoute] Guid id)
         {
             // Get from database - Domain Model
@@ -71,21 +71,21 @@ namespace EnergieBewustLeven.API.Controllers
         //GET MEASUREMENT BY APPLIANCE
         //GET:
         [HttpGet]
-        [Route("ByAppliance/{id:Guid}")]
-        public async Task<IActionResult> GetMeasurementsByAppliance([FromRoute] Guid applianceId)
+        [Route("ByAppliance/{applianceId:Guid}")]
+        public async Task<IActionResult> GetMeasurementByAppliance([FromRoute] Guid applianceId)
         {
             // Get from database - Domain Model
             var measurementsDomain = await dbContext.Measurements.Where(m => m.ApplianceId == applianceId).ToListAsync();
 
             // Map Domain Models to DTOs
             var measurementsDTO = new List<MeasurementDTO>();
-            foreach (var measurementDomain in measurementsDomain)
+            foreach (var measrementDomain in measurementsDomain)
             {
                 measurementsDTO.Add(new MeasurementDTO()
                 {
-                    Id = measurementDomain.Id,
-                    ApplianceId = measurementDomain.ApplianceId,
-                    Verbruik = measurementDomain.Verbruik
+                    Id = measrementDomain.Id,
+                    ApplianceId = measrementDomain.ApplianceId,
+                    Verbruik = measrementDomain.Verbruik
                 });
             }
 
@@ -140,7 +140,5 @@ namespace EnergieBewustLeven.API.Controllers
 
             return NoContent();
         }
-
-        
     }
 }
