@@ -111,9 +111,9 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View();
         }
 
-        public IActionResult Compare(CompareViewModel compareViewModel)
-        {
+        //public IActionResult Compare(CompareViewModel compareViewModel)
+        //{
 
-        }
+        //}
     }
 }

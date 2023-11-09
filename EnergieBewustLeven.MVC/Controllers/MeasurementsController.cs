@@ -1,5 +1,6 @@
 ﻿using EnergieBewustLeven.API.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EnergieBewustLeven.MVC.Controllers
 {
@@ -9,9 +10,52 @@ namespace EnergieBewustLeven.MVC.Controllers
         //Hosted web API REST Service base url
         string Baseurl = "https://localhost:7218/api/";
 
-        public IActionResult Create()
+        
+
+        public async Task<IActionResult> Create()
         {
+            // Call the API to get the list of ApplianceDTOs
+            List<ApplianceDTO> applianceDTOs = await GetApplianceDTOsFromApiAsync();
+
+            // Populate the ViewBag with a list of SelectListItem using the ApplianceDTOs
+            ViewBag.ApplianceIdList = GetApplianceIdList(applianceDTOs);
+
             return View();
+        }
+
+        private List<SelectListItem> GetApplianceIdList(List<ApplianceDTO> applianceDTOs)
+        {
+            // Create a list of SelectListItem from the ApplianceDTOs
+            List<SelectListItem> selectListItems = applianceDTOs
+                .Select(appliance => new SelectListItem { Value = appliance.Id.ToString(), Text = appliance.Name })
+                .ToList();
+
+            return selectListItems;
+        }
+
+        private async Task<List<ApplianceDTO>> GetApplianceDTOsFromApiAsync()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                // Replace the base address with your actual API base address
+                client.BaseAddress = new Uri(Baseurl);
+
+                // Replace the endpoint with your actual API endpoint for getting appliances
+                HttpResponseMessage response = await client.GetAsync("Appliances");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read and deserialize the response content
+                    var appliancesDTO = await response.Content.ReadAsAsync<List<ApplianceDTO>>();
+                    return appliancesDTO;
+                }
+                else
+                {
+                    // Handle error, log, throw exception, etc.
+                    // For now, we'll return an empty list in case of an error
+                    return new List<ApplianceDTO>();
+                }
+            }
         }
 
         //POST: measurements/create
