@@ -1,4 +1,4 @@
-﻿@model EnergieBewustLeven.API.Models.DTO.ApplianceDTO
+﻿@model EnergieBewustLeven.MVC.Models.ApplianceDetailViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,20 +11,31 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.ApplianceName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.ApplianceName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
+            @Html.DisplayNameFor(model => model.ApplianceBrand)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brand)
+            @Html.DisplayFor(model => model.ApplianceBrand)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Gemeten vebruik:")
+        </dt>
+        @foreach (var item in Model.Measurements)
+        {
+            <div>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(modelItem => item.Verbruik)
+                </dd>
+            </div>
+        }
     </dl>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="" asp-route-id="@Model?.Id">Meting toevoegen</a> |
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="" asp-route-id="@Model?.ApplianceId">Meting toevoegen</a> |
+    <a class="btn btn-primary" asp-action="Index">Terug naar apparaten</a>
 </div>
