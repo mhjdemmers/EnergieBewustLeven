@@ -69,7 +69,6 @@ namespace EnergieBewustLeven.MVC.Controllers
                 }
             }
 
-            //adding measurements onto detail page
 
             List<MeasurementDTO> measurements = null;
             using (var client = new HttpClient())
