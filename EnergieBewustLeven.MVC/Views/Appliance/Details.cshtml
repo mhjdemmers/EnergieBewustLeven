@@ -51,7 +51,10 @@
     </table>
 </div>
 <div class="button-container">
-    <a class="btn btn-primary" asp-action="" asp-route-id="@Model?.ApplianceId">Meting toevoegen</a> |
+    @if (User.IsInRole("User") || User.IsInRole("Admin"))
+    {
+        <a class="btn btn-primary" asp-controller="Measurements" asp-action="Create" asp-route-id="@Model?.ApplianceId">Meting toevoegen</a>
+    }
     <a class="btn btn-primary" asp-action="Index">Terug naar apparaten</a>
 </div>
 
