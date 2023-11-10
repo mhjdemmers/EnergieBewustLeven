@@ -23,13 +23,20 @@ namespace EnergieBewustLeven.MVC.Controllers
         string Baseurl = "https://localhost:7218/api/";
 
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(Guid id)
         {
             // Call the API to get the list of ApplianceDTOs
             List<ApplianceDTO> applianceDTOs = await GetApplianceDTOsFromApiAsync();
+            List<SelectListItem> selectListItems = GetApplianceIdList(applianceDTOs);
 
             // Populate the ViewBag with a list of SelectListItem using the ApplianceDTOs
-            ViewBag.ApplianceIdList = GetApplianceIdList(applianceDTOs);
+
+            ViewBag.ApplianceIdList = selectListItems;
+
+            if (id != null)
+            {
+                ViewBag.SelectedAppliance = selectListItems.FirstOrDefault(x => x.Value == id.ToString());
+            }
 
             return View();
         }
