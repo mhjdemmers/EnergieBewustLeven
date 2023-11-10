@@ -1,12 +1,23 @@
 ﻿using EnergieBewustLeven.API.Models.DTO;
+using EnergieBewustLeven.MVC.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
 
 namespace EnergieBewustLeven.MVC.Controllers
 {
     public class ReviewsController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext dbContext;
+
+        public ReviewsController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+            this.dbContext = dbContext;
+        }
 
         //Hosted web API REST Service base url
         string Baseurl = "https://localhost:7218/api/";
@@ -89,8 +100,28 @@ namespace EnergieBewustLeven.MVC.Controllers
                     ModelState.AddModelError(string.Empty, "Server error try after some time.");
                 }
 
+                AddLevel();
+
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        public ApplicationUser GetLoggedInUser()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+            ApplicationUser applicationUser = new ApplicationUser();
+            applicationUser = dbContext.Users.FirstOrDefault(x => x.Id == userId);
+            return applicationUser;
+        }
+
+        public IActionResult AddLevel()
+        {
+            var user = GetLoggedInUser();
+            user.Level = user.Level + 1;
+            dbContext.Update(user);
+            dbContext.SaveChanges();
+
+            return Ok();
         }
     }
 }

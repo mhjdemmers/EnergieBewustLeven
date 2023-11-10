@@ -38,6 +38,26 @@ namespace EnergieBewustLeven.MVC.Controllers
             user.Level = user.Level + 1;
             dbContext.Update(user);
             dbContext.SaveChanges();
+
+            return Ok();
+        }
+
+        public IActionResult AddLevelDebug()
+        {
+            var user = GetLoggedInUser();
+            user.Level = user.Level + 1;
+            dbContext.Update(user);
+            dbContext.SaveChanges();
+
+            return RedirectToAction("ProgressionPlaceholder", "Home");
+        }
+
+        public IActionResult ResetLevelDebug()
+        {
+            var user = GetLoggedInUser();
+            user.Level = 0;
+            dbContext.Update(user);
+            dbContext.SaveChanges();
             return RedirectToAction("ProgressionPlaceholder", "Home");
         }
 
