@@ -1,0 +1,45 @@
+﻿@model EnergieBewustLeven.API.Models.DTO.AddMeasurementRequestDTO
+
+@{
+    SelectListItem viewbag = ViewBag.SelectedAppliance;
+    // <p>@viewbag.Value - @viewbag.Text</p>
+    // var applianceIdList = ViewBag.ApplianceIdList as List<SelectListItem>;
+    // if (applianceIdList != null)
+    // {
+    //     foreach (var item in applianceIdList)
+    //     {
+    //         <p>@item.Value - @item.Text</p>
+    //     }
+    // }
+}
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Measurement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplianceId" class="control-label">Appliance</label>
+                <select asp-for="ApplianceId" asp-items="@(new SelectList(ViewBag.ApplianceIdList, "Value", "Text"))" class="form-control">
+                    <option value="@viewbag.Value">@viewbag.Text</option>
+                </select>
+                <span asp-validation-for="ApplianceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Verbruik" class="control-label">Verbruik</label>
+                <input asp-for="Verbruik" class="form-control" />
+                <span asp-validation-for="Verbruik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

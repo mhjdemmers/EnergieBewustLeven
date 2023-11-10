@@ -12,5 +12,6 @@ namespace EnergieBewustLeven.API.Data
 
         public DbSet<Appliance> Appliances { get; set; }
         public DbSet<Measurement> Measurements { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

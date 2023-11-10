@@ -1,0 +1,32 @@
+﻿@model EnergieBewustLeven.MVC.Data.ApplicationUser
+@{
+    ViewData["Title"] = "ProgressionPlaceholder";
+}
+
+<div>
+    <h4>Level: @Model.Level</h4>
+    @if(Model.Level < 10)
+    {
+        <div>
+            <img src="~/Images/progression1.png"/>
+        </div>
+    }
+    else if(Model.Level >= 10 && Model.Level < 20)
+    {
+        <div>
+            <img src="~/Images/progression2.png"/>
+        </div>
+    }
+    else
+    {
+        <div>
+            <img src="~/Images/progression3.png"/>
+        </div>
+    }
+</div>
+<div>
+    <a class="btn btn-primary" asp-controller="Users" asp-action="AddLevelDebug">Debug Add level</a>
+</div>
+<div>
+    <a class="btn btn-primary" asp-controller="Users" asp-action="ResetLevelDebug">Debug Reset level</a>
+</div>
