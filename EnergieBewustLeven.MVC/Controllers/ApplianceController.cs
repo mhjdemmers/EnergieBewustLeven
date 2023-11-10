@@ -6,13 +6,17 @@ namespace EnergieBewustLeven.MVC.Controllers
 {
     public class ApplianceController : Controller
     {
+
+        //Hosted web API REST Service base url
+        string Baseurl = "https://localhost:7218/api/";
+
         public IActionResult Index()
         {
             IEnumerable<ApplianceDTO> appliances = null;
             using (var client = new HttpClient())
             {
                 //Setting the base address of the API
-                client.BaseAddress = new Uri("https://localhost:7218/api/");
+                client.BaseAddress = new Uri(Baseurl);
 
                 //Making a HttpGet Request
                 var responseTask = client.GetAsync("appliances");
@@ -39,13 +43,53 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View(appliances);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        //POST: appliance/create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(AddApplianceRequestDTO appliance)
+        {
+            using (var client = new HttpClient())
+            {
+                //Setting the base address of the API
+                client.BaseAddress = new Uri(Baseurl);
+
+                //Making a HttpPost Request
+                var responseTask = client.PostAsJsonAsync("Appliances", appliance);
+                responseTask.Wait();
+
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<AddApplianceRequestDTO>();
+                    readTask.Wait();
+
+                    appliance = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         public IActionResult Details(Guid id)
         {
             ApplianceDTO appliance = null;
             using (var client = new HttpClient())
             {
                 //Setting the base address of the API
-                client.BaseAddress = new Uri("https://localhost:7218/api/appliances/");
+                client.BaseAddress = new Uri(Baseurl + "appliances/");
 
                 //Making a HttpGet Request
                 var responseTask = client.GetAsync(id.ToString());

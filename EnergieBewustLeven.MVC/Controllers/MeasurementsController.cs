@@ -33,41 +33,6 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View();
         }
 
-        private List<SelectListItem> GetApplianceIdList(List<ApplianceDTO> applianceDTOs)
-        {
-            // Create a list of SelectListItem from the ApplianceDTOs
-            List<SelectListItem> selectListItems = applianceDTOs
-                .Select(appliance => new SelectListItem { Value = appliance.Id.ToString(), Text = appliance.Name })
-                .ToList();
-
-            return selectListItems;
-        }
-
-        private async Task<List<ApplianceDTO>> GetApplianceDTOsFromApiAsync()
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                // Replace the base address with your actual API base address
-                client.BaseAddress = new Uri(Baseurl);
-
-                // Replace the endpoint with your actual API endpoint for getting appliances
-                HttpResponseMessage response = await client.GetAsync("Appliances");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    // Read and deserialize the response content
-                    var appliancesDTO = await response.Content.ReadAsAsync<List<ApplianceDTO>>();
-                    return appliancesDTO;
-                }
-                else
-                {
-                    // Handle error, log, throw exception, etc.
-                    // For now, we'll return an empty list in case of an error
-                    return new List<ApplianceDTO>();
-                }
-            }
-        }
-
         //POST: measurements/create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,6 +67,41 @@ namespace EnergieBewustLeven.MVC.Controllers
                 AddLevel();
 
                 return RedirectToAction("Index", "Home");
+            }
+        }
+
+        private List<SelectListItem> GetApplianceIdList(List<ApplianceDTO> applianceDTOs)
+        {
+            // Create a list of SelectListItem from the ApplianceDTOs
+            List<SelectListItem> selectListItems = applianceDTOs
+                .Select(appliance => new SelectListItem { Value = appliance.Id.ToString(), Text = appliance.Name })
+                .ToList();
+
+            return selectListItems;
+        }
+
+        private async Task<List<ApplianceDTO>> GetApplianceDTOsFromApiAsync()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                // Replace the base address with your actual API base address
+                client.BaseAddress = new Uri(Baseurl);
+
+                // Replace the endpoint with your actual API endpoint for getting appliances
+                HttpResponseMessage response = await client.GetAsync("Appliances");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read and deserialize the response content
+                    var appliancesDTO = await response.Content.ReadAsAsync<List<ApplianceDTO>>();
+                    return appliancesDTO;
+                }
+                else
+                {
+                    // Handle error, log, throw exception, etc.
+                    // For now, we'll return an empty list in case of an error
+                    return new List<ApplianceDTO>();
+                }
             }
         }
 
