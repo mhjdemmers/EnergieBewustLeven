@@ -4,6 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
+@{
+    SelectListItem viewbag = ViewBag.SelectedAppliance;
+}
+
 <h1>Create</h1>
 
 <h4>Review</h4>
@@ -15,7 +19,7 @@
             <div class="form-group">
                 <label asp-for="ApplianceId" class="control-label">Appliance</label>
                 <select asp-for="ApplianceId" asp-items="@(new SelectList(ViewBag.ApplianceIdList, "Value", "Text"))" class="form-control">
-                    <option value="">Select Appliance</option>
+                    <option value="@viewbag.Value">@viewbag.Text</option>
                 </select>
                 <span asp-validation-for="ApplianceId" class="text-danger"></span>
             </div>
