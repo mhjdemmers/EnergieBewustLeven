@@ -184,6 +184,12 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View();
         }
 
+        //public IActionResult TestAction()
+        //{
+        //    Guid id = new Guid();
+        //    return RedirectToAction(Details(id).ToString());
+        //}
+
         //public IActionResult Compare(CompareViewModel compareViewModel)
         //{
 
