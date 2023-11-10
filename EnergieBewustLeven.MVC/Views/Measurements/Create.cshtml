@@ -1,15 +1,17 @@
 ﻿@model EnergieBewustLeven.API.Models.DTO.AddMeasurementRequestDTO
 
-@*@{
-    var applianceIdList = ViewBag.ApplianceIdList as List<SelectListItem>;
-    if (applianceIdList != null)
-    {
-        foreach (var item in applianceIdList)
-        {
-            <p>@item.Value - @item.Text</p>
-        }
-    }
-}*@
+@{
+    SelectListItem viewbag = ViewBag.SelectedAppliance;
+    // <p>@viewbag.Value - @viewbag.Text</p>
+    // var applianceIdList = ViewBag.ApplianceIdList as List<SelectListItem>;
+    // if (applianceIdList != null)
+    // {
+    //     foreach (var item in applianceIdList)
+    //     {
+    //         <p>@item.Value - @item.Text</p>
+    //     }
+    // }
+}
 
 @{
     ViewData["Title"] = "Create";
@@ -26,7 +28,7 @@
             <div class="form-group">
                 <label asp-for="ApplianceId" class="control-label">Appliance</label>
                 <select asp-for="ApplianceId" asp-items="@(new SelectList(ViewBag.ApplianceIdList, "Value", "Text"))" class="form-control">
-                    <option value="">Select Appliance</option>
+                    <option value="@viewbag.Value">@viewbag.Text</option>
                 </select>
                 <span asp-validation-for="ApplianceId" class="text-danger"></span>
             </div>
