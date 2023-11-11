@@ -1,6 +1,7 @@
 ﻿using EnergieBewustLeven.API.Models.DTO;
 using EnergieBewustLeven.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
 
 namespace EnergieBewustLeven.MVC.Controllers
 {
@@ -42,6 +43,43 @@ namespace EnergieBewustLeven.MVC.Controllers
             }
             return View(appliances);
         }
+
+        public IActionResult Search(string searchString)
+        {
+            IEnumerable<ApplianceDTO> appliances = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+
+                var responseTask = client.GetAsync("appliances");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<ApplianceDTO>>();
+                    readTask.Wait();
+
+                    appliances = readTask.Result;
+
+                    // Filter op naam indien zoektekst aanwezig is
+                    if (!string.IsNullOrEmpty(searchString))
+                    {
+                        appliances = appliances.Where(a => a.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+                    }
+                }
+                else
+                {
+                    appliances = Enumerable.Empty<ApplianceDTO>();
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+            }
+            return View("Index", appliances);
+        }
+
+
+
 
         public IActionResult Create()
         {
