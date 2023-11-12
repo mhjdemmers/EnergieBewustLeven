@@ -22,25 +22,6 @@ namespace EnergieBewustLeven.MVC.Controllers
         //Hosted web API REST Service base url
         string Baseurl = "https://localhost:7218/api/";
 
-
-        public async Task<IActionResult> Create(Guid id)
-        {
-            // Call the API to get the list of ApplianceDTOs
-            List<ApplianceDTO> applianceDTOs = await GetApplianceDTOsFromApiAsync();
-            List<SelectListItem> selectListItems = GetApplianceIdList(applianceDTOs);
-
-            // Populate the ViewBag with a list of SelectListItem using the ApplianceDTOs
-
-            ViewBag.ApplianceIdList = selectListItems;
-
-            if (id != null)
-            {
-                ViewBag.SelectedAppliance = selectListItems.FirstOrDefault(x => x.Value == id.ToString());
-            }
-
-            return View();
-        }
-
         private List<SelectListItem> GetApplianceIdList(List<ApplianceDTO> applianceDTOs)
         {
             // Create a list of SelectListItem from the ApplianceDTOs
@@ -74,6 +55,57 @@ namespace EnergieBewustLeven.MVC.Controllers
                     return new List<ApplianceDTO>();
                 }
             }
+        }
+
+        public IActionResult AdminIndex()
+        {
+            IEnumerable<ReviewDTO> reviews = null;
+            using (var client = new HttpClient())
+            {
+                //Setting the base address of the API
+                client.BaseAddress = new Uri(Baseurl);
+
+                //Making a HttpGet Request
+                var responseTask = client.GetAsync("reviews");
+                responseTask.Wait();
+
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<ReviewDTO>>();
+                    readTask.Wait();
+
+                    reviews = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    reviews = Enumerable.Empty<ReviewDTO>();
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+            }
+            return View(reviews);
+        }
+
+        public async Task<IActionResult> Create(Guid id)
+        {
+            // Call the API to get the list of ApplianceDTOs
+            List<ApplianceDTO> applianceDTOs = await GetApplianceDTOsFromApiAsync();
+            List<SelectListItem> selectListItems = GetApplianceIdList(applianceDTOs);
+
+            // Populate the ViewBag with a list of SelectListItem using the ApplianceDTOs
+
+            ViewBag.ApplianceIdList = selectListItems;
+
+            if (id != null)
+            {
+                ViewBag.SelectedAppliance = selectListItems.FirstOrDefault(x => x.Value == id.ToString());
+            }
+
+            return View();
         }
 
         //POST: reviews/create
@@ -111,6 +143,39 @@ namespace EnergieBewustLeven.MVC.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        public IActionResult Delete(Guid id)
+        {
+            ReviewDTO review = null;
+            using (var client = new HttpClient())
+            {
+                //Setting the base address of the API
+                client.BaseAddress = new Uri(Baseurl + "reviews/");
+
+                //Making a HttpGet Request
+                var responseTask = client.GetAsync(id.ToString());
+                responseTask.Wait();
+
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<ReviewDTO>();
+                    readTask.Wait();
+
+                    review = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+            }
+
+            return View(review);
         }
 
         public ApplicationUser GetLoggedInUser()

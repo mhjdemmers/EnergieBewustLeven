@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<h1>Waar wilt u gebruik van maken?</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                <a class="btn btn-primary" asp-controller="Appliance" asp-action="AdminIndex">Apparatuur beheren</a>
+            </th>
+            <th class="text-center">
+                <a class="btn btn-primary" asp-controller="Appliance" asp-action="Create">Apparatuur toevoegen</a>
+            </th>
+            <th class="text-center">
+                <a class="btn btn-primary" asp-controller="Measurements" asp-action="AdminIndex">Metingen beheren</a>
+            </th>
+            <th class="text-center">
+                <a class="btn btn-primary" asp-controller="Reviews" asp-action="AdminIndex">Reviews beheren</a>
+            </th>
+        </tr>
+    </thead>
+</table>
