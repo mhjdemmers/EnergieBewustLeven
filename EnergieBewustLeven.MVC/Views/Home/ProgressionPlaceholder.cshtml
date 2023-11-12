@@ -3,15 +3,43 @@
     ViewData["Title"] = "ProgressionPlaceholder";
 }
 
+@{
+    int milestone1 = 10;
+    int milestone2 = 20;
+}
+
+@{
+    var maxWidth = 100;
+    int progressionWidth;
+    @if (Model.Level < milestone1)
+    {
+        maxWidth = 100;
+        progressionWidth = @milestone1 - @Model.Level;
+        progressionWidth = progressionWidth * 10;
+        progressionWidth = maxWidth - progressionWidth;
+    }
+    else if (Model.Level >= milestone1 && Model.Level < milestone2)
+    {
+        maxWidth = 100;
+        progressionWidth = @milestone2 - @Model.Level;
+        progressionWidth = progressionWidth * 10;
+        progressionWidth = maxWidth - progressionWidth;
+    }
+    else
+    {
+        progressionWidth = 100;
+    }
+}
+<div class="text-center">
+<h1>Welkom @Model.Name, Uw level is: Lv @Model.Level</h1>
 <div>
-    <h4>Level: @Model.Level</h4>
-    @if(Model.Level < 10)
+    @if(Model.Level < milestone1)
     {
         <div>
             <img src="~/Images/progression1.png"/>
         </div>
     }
-    else if(Model.Level >= 10 && Model.Level < 20)
+    else if(Model.Level >= milestone1 && Model.Level < milestone2)
     {
         <div>
             <img src="~/Images/progression2.png"/>
@@ -24,9 +52,75 @@
         </div>
     }
 </div>
+    <div>
+        @if (Model.Level < milestone1)
+        {
+            <div>
+                <h4>Om uw volgende karakter te behalen moet u de volgende mijlpaal behalen: @milestone1</h4>
+            </div>
+        }
+        else if (Model.Level >= milestone1 && Model.Level < milestone2)
+        {
+            <div>
+                <h4>Om uw volgende karakter te behalen moet u de volgende mijlpaal behalen: @milestone2</h4>
+            </div>
+        }
+        else
+        {
+            <div>
+                <h4>U heeft de maximale mijlpaal behaalt, u kunt nog altijd levels verdienen!</h4>
+            </div>
+        }
+            <style>
+                #myProgress {
+                    width: 100%;
+                    background-color: #ddd;
+                }
+
+                #myBar {
+                    width: @progressionWidth%;
+                    height: 30px;
+                    background-color: #04AA6D;
+                }
+            </style>
+            <body>
+                <div id="myProgress">
+                    <div id="myBar" onload="move()"></div>
+                </div>
+
+                <script>
+                    var i = 0;
+                    function move() {
+                        if (i == 0) {
+                            i = 1;
+                            var elem = document.getElementById("myBar");
+                            var width = 0;
+                            var id = setInterval(frame, 10);
+                            function frame() {
+                                var maxWidth = 100;
+                                var progressionWidth = @milestone1 - @Model.Level;
+                                progressionWidth = progressionWidth * 10;
+                                progressionWidth = maxWidth - progressionWidth;
+                                if (width >= progressionWidth) {
+                                    clearInterval(id);
+                                    i = 0;
+                                } else {
+                                    width++;
+                                    elem.style.width = width + "%";
+                                }
+                            }
+                        }
+                    }
+                </script>
+            </body>
+        
+    </div>
+    <div><p></p></div>
 <div>
     <a class="btn btn-primary" asp-controller="Users" asp-action="AddLevelDebug">Debug Add level</a>
 </div>
+<div><p></p></div>
 <div>
     <a class="btn btn-primary" asp-controller="Users" asp-action="ResetLevelDebug">Debug Reset level</a>
+</div>
 </div>
