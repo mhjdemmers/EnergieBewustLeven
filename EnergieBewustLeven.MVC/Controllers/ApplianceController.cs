@@ -78,8 +78,38 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View("Index", appliances);
         }
 
+        public IActionResult AdminIndex()
+        {
+            IEnumerable<ApplianceDTO> appliances = null;
+            using (var client = new HttpClient())
+            {
+                //Setting the base address of the API
+                client.BaseAddress = new Uri(Baseurl);
 
+                //Making a HttpGet Request
+                var responseTask = client.GetAsync("appliances");
+                responseTask.Wait();
 
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<ApplianceDTO>>();
+                    readTask.Wait();
+
+                    appliances = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    appliances = Enumerable.Empty<ApplianceDTO>();
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+            }
+            return View(appliances);
+        }
 
         public IActionResult Create()
         {
