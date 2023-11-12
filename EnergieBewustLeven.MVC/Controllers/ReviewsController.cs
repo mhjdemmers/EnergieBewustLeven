@@ -151,7 +151,7 @@ namespace EnergieBewustLeven.MVC.Controllers
             using (var client = new HttpClient())
             {
                 //Setting the base address of the API
-                client.BaseAddress = new Uri(Baseurl + "reviews/");
+                client.BaseAddress = new Uri(Baseurl + "reviews/ById/");
 
                 //Making a HttpGet Request
                 var responseTask = client.GetAsync(id.ToString());
@@ -173,9 +173,8 @@ namespace EnergieBewustLeven.MVC.Controllers
                     //Error response received   
                     ModelState.AddModelError(string.Empty, "Server error try after some time.");
                 }
+                return View(review);
             }
-
-            return View(review);
         }
 
         //DELETE: review/delete

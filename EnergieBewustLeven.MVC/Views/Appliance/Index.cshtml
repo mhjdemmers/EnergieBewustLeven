@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<EnergieBewustLeven.API.Models.DTO.ApplianceDTO>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Apparatenlijst";
 }
 
 <h1>Alle apparaten: </h1>
@@ -9,10 +9,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayName("Apparaat Naam")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayName("Apparaat Merk")
             </th>
             <th></th>
         </tr>
@@ -30,7 +30,7 @@
                 <td>
                     <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details bekijken</a> |
                     <a class="btn btn-primary" asp-action="" asp-route-id="@item.Id">Vergelijken</a>
-                    </td>
+                </td>
             </tr>   
         }
     </tbody>

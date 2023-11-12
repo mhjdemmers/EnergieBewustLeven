@@ -9,10 +9,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayName("Apparaatnaam")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayName("Merk")
             </th>
             <th></th>
         </tr>
@@ -27,6 +27,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Brand)
                 </td>
+                <td><p></p></td>
                 <td>
                     <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details bekijken</a> |
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>

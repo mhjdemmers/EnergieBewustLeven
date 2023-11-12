@@ -4,20 +4,20 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>De details van uw gekozen device:</h1>
 
 <div>
     <h4>@Html.DisplayNameFor(model => model.ApplianceName)</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplianceName)
+            @Html.DisplayName("Naam van het apparaat:")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ApplianceName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplianceBrand)
+            @Html.DisplayName("Merk van het apparaat:")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ApplianceBrand)
@@ -54,7 +54,10 @@
     {
         <a class="btn btn-primary" asp-controller="Measurements" asp-action="Create" asp-route-id="@Model?.ApplianceId">Meting toevoegen</a>
         <a class="btn btn-primary" asp-controller="Reviews" asp-action="Create" asp-route-id="@Model?.ApplianceId">Review toevoegen</a>
-        <a class="btn btn-danger" asp-controller="Appliance" asp-action="Delete" asp-route-id="@Model?.ApplianceId">Appliance verwijderen</a>
+        if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-danger" asp-controller="Appliance" asp-action="Delete" asp-route-id="@Model?.ApplianceId">Appliance verwijderen</a>
+        }
     }
     <a class="btn btn-primary" asp-action="Index">Terug naar apparaten</a>
 </div>
