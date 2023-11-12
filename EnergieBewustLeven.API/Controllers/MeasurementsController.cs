@@ -27,10 +27,10 @@ namespace EnergieBewustLeven.API.Controllers
             var measurementsDomain = dbContext.Measurements.ToList();
 
             // Map Domain Models to DTOs
-            var measurementDTO = new List<MeasurementDTO>();
+            var measurementsDTO = new List<MeasurementDTO>();
             foreach (var measurementDomain in measurementsDomain)
             {
-                measurementDTO.Add(new MeasurementDTO()
+                measurementsDTO.Add(new MeasurementDTO()
                 {
                     Id = measurementDomain.Id,
                     ApplianceId = measurementDomain.ApplianceId,
@@ -39,7 +39,7 @@ namespace EnergieBewustLeven.API.Controllers
             }
 
             // Return DTOs
-            return Ok(measurementDTO);
+            return Ok(measurementsDTO);
         }
 
         //GET MEASUREMENT BY ID

@@ -43,7 +43,6 @@
                     @Html.DisplayFor(modelItem => item.ReviewText)
                 </td>
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.ReviewScore)*@
                     @(item.ReviewScore)/10
                 </td>
             </tr>
@@ -55,16 +54,12 @@
     {
         <a class="btn btn-primary" asp-controller="Measurements" asp-action="Create" asp-route-id="@Model?.ApplianceId">Meting toevoegen</a>
         <a class="btn btn-primary" asp-controller="Reviews" asp-action="Create" asp-route-id="@Model?.ApplianceId">Review toevoegen</a>
-        <a class="btn btn-primary" asp-controller="Appliance" asp-action="Delete" asp-route-id="@Model?.ApplianceId">Appliance verwijderen</a>
+        <a class="btn btn-danger" asp-controller="Appliance" asp-action="Delete" asp-route-id="@Model?.ApplianceId">Appliance verwijderen</a>
     }
     <a class="btn btn-primary" asp-action="Index">Terug naar apparaten</a>
 </div>
 
 <style>
- /*   table {
-        width: 100%;
-    }*/
-
     td {
         padding: 8px;
     }
@@ -73,7 +68,4 @@
         margin-top: 50px;
     }
 
-/*    .btn {
-        margin-right: 10px; 
-    }*/
 </style>

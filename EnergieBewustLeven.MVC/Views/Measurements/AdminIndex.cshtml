@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EnergieBewustLeven.API.Models.DTO.MeasurementDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alle metingen: </h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplianceId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Verbruik)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplianceId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Verbruik) kWh
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -43,6 +43,11 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View();
         }
 
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
         public IActionResult ListPlaceholder()
         {
             return View();
@@ -52,8 +57,6 @@ namespace EnergieBewustLeven.MVC.Controllers
         {
             return View();
         }
-
-        
 
         public ApplicationUser GetLoggedInUser()
         {
@@ -69,10 +72,12 @@ namespace EnergieBewustLeven.MVC.Controllers
             var loggedInUser = GetLoggedInUser();
             return View(loggedInUser);
         }
+
         public IActionResult ProgressionNext()
         {
             return RedirectToAction("ProgressionPlaceholder");
         }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
