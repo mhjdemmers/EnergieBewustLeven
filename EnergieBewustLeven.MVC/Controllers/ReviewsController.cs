@@ -178,6 +178,33 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View(review);
         }
 
+        //DELETE: review/delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(ReviewDTO review)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl + "Reviews/");
+
+                var responseTask = client.DeleteAsync(review.Id.ToString());
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Server error please try again after some time");
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         public ApplicationUser GetLoggedInUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
