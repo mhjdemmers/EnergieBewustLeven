@@ -1,5 +1,6 @@
 ﻿using EnergieBewustLeven.API.Models.DTO;
 using EnergieBewustLeven.MVC.Data;
+using EnergieBewustLeven.MVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,6 +22,38 @@ namespace EnergieBewustLeven.MVC.Controllers
         //Hosted web API REST Service base url
         string Baseurl = "https://localhost:7218/api/";
 
+        public IActionResult AdminIndex()
+        {
+            IEnumerable<MeasurementDTO> measurements = null;
+            using (var client = new HttpClient())
+            {
+                //Setting the base address of the API
+                client.BaseAddress = new Uri(Baseurl);
+
+                //Making a HttpGet Request
+                var responseTask = client.GetAsync("measurements");
+                responseTask.Wait();
+
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<MeasurementDTO>>();
+                    readTask.Wait();
+
+                    measurements = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    measurements = Enumerable.Empty<MeasurementDTO>();
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+            }
+            return View(measurements);
+        }
         
         public async Task<IActionResult> Create(Guid id)
         {
@@ -75,6 +108,39 @@ namespace EnergieBewustLeven.MVC.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        public IActionResult Delete(Guid id)
+        {
+            MeasurementDTO measurement = null;
+            using (var client = new HttpClient())
+            {
+                //Setting the base address of the API
+                client.BaseAddress = new Uri(Baseurl + "measurements/");
+
+                //Making a HttpGet Request
+                var responseTask = client.GetAsync(id.ToString());
+                responseTask.Wait();
+
+                //To store result of web api response.   
+                var result = responseTask.Result;
+
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<MeasurementDTO>();
+                    readTask.Wait();
+
+                    measurement = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    ModelState.AddModelError(string.Empty, "Server error try after some time.");
+                }
+            }
+
+            return View(measurement);
         }
 
         private List<SelectListItem> GetApplianceIdList(List<ApplianceDTO> applianceDTOs)

@@ -3,7 +3,7 @@
     ViewData["Title"] = "Energiebewust leven";
 }
 
-<h1>Waar wil u gebruik van maken?</h1>
+<h1>Waar wilt u gebruik van maken?</h1>
 
 <table class="table">
     <thead>
@@ -14,7 +14,7 @@
 @*            <th class="text-center">
                 <a class="btn btn-primary" asp-controller="Appliance" asp-action="Compare">Apparatuur vergelijken</a>
             </th>*@
-            @if (User.IsInRole("Admin") || User.IsInRole("User"))
+            @*@if (User.IsInRole("Admin") || User.IsInRole("User"))
             {
                 <th class="text-center">
                     <a class="btn btn-primary" asp-controller="Measurements" asp-action="Create">Meting toevoegen</a>
@@ -22,7 +22,7 @@
                 <th class="text-center">
                     <a class="btn btn-primary" asp-controller="Reviews" asp-action="Create">Review toevoegen</a>
                 </th>
-            }
+            }*@
             
         </tr>
     </thead>

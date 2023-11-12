@@ -18,6 +18,31 @@ namespace EnergieBewustLeven.API.Controllers
             this.dbContext = dbContext;
         }
 
+        // GET ALL REVIEWS
+        //GET: 
+        [HttpGet]
+        public IActionResult Reviews()
+        {
+            // Get from database - Domain Model
+            var reviewsDomain = dbContext.Reviews.ToList();
+
+            // Map Domain Models to DTOs
+            var reviewsDTO = new List<ReviewDTO>();
+            foreach (var reviewDomain in reviewsDomain)
+            {
+                reviewsDTO.Add(new ReviewDTO()
+                {
+                    Id = reviewDomain.Id,
+                    ApplianceId = reviewDomain.ApplianceId,
+                    ReviewText = reviewDomain.ReviewText,
+                    ReviewScore = reviewDomain.ReviewScore
+                });
+            }
+
+            // Return DTOs
+            return Ok(reviewsDTO);
+        }
+
         //GET REVIEW BY ID
         //GET:
         [HttpGet]
