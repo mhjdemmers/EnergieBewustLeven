@@ -143,6 +143,33 @@ namespace EnergieBewustLeven.MVC.Controllers
             return View(measurement);
         }
 
+        //DELETE: measurement/delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(MeasurementDTO measurement)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl + "Measurements/");
+
+                var responseTask = client.DeleteAsync(measurement.Id.ToString());
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Server error please try again after some time");
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         private List<SelectListItem> GetApplianceIdList(List<ApplianceDTO> applianceDTOs)
         {
             // Create a list of SelectListItem from the ApplianceDTOs
