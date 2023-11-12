@@ -1,0 +1,22 @@
+﻿@model EnergieBewustLeven.MVC.Models.CompareResultsViewModel
+
+@{
+    ViewData["Title"] = "Vergelijking Resultaten";
+}
+
+<h1>Vergelijking Resultaten</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Details Apparaat 1</h2>
+        <p>@Model.Appliance1.Name</p>
+        <p>@Model.Appliance1.Brand</p>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Details Apparaat 2</h2>
+        <p>@Model.Appliance2.Name</p>
+        <p>@Model.Appliance2.Brand</p>
+    </div>
+</div>

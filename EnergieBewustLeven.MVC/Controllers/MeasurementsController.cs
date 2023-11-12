@@ -59,7 +59,6 @@ namespace EnergieBewustLeven.MVC.Controllers
         {
             // Call the API to get the list of ApplianceDTOs
             List<ApplianceDTO> applianceDTOs = await GetApplianceDTOsFromApiAsync();
-            
             List<SelectListItem> selectListItems = GetApplianceIdList(applianceDTOs);
 
             // Populate the ViewBag with a list of SelectListItem using the ApplianceDTOs
@@ -184,10 +183,8 @@ namespace EnergieBewustLeven.MVC.Controllers
         {
             using (HttpClient client = new HttpClient())
             {
-                // Replace the base address with your actual API base address
                 client.BaseAddress = new Uri(Baseurl);
 
-                // Replace the endpoint with your actual API endpoint for getting appliances
                 HttpResponseMessage response = await client.GetAsync("Appliances");
 
                 if (response.IsSuccessStatusCode)
@@ -199,7 +196,6 @@ namespace EnergieBewustLeven.MVC.Controllers
                 else
                 {
                     // Handle error, log, throw exception, etc.
-                    // For now, we'll return an empty list in case of an error
                     return new List<ApplianceDTO>();
                 }
             }

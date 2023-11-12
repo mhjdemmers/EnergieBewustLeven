@@ -1,0 +1,32 @@
+﻿@model EnergieBewustLeven.MVC.Models.CompareViewModel
+@{
+    ViewData["Title"] = "Compare";
+}
+
+<h1>Vergelijk apparatuur:</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CompareResults" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplianceId1" class="control-label">Selecteer uw eerste apparaat:</label>
+                <select asp-for="ApplianceId1" asp-items="@(new SelectList(ViewBag.ApplianceIdList, "Value", "Text"))" class="form-control">
+                    <option value="">Selecteer apparaat</option>
+                </select>
+                <span asp-validation-for="ApplianceId1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplianceId2" class="control-label">Selecteer uw tweede apparaat:</label>
+                <select asp-for="ApplianceId2" asp-items="@(new SelectList(ViewBag.ApplianceIdList, "Value", "Text"))" class="form-control">
+                    <option value="">Selecteer apparaat</option>
+                </select>
+                <span asp-validation-for="ApplianceId2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Vergelijk" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
